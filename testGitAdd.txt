@@ -1,0 +1,2 @@
+Testing git add, commit, push from scisub/sciget to github.com
+have already tested that it works the other way, from github.com to scisub/sciget
