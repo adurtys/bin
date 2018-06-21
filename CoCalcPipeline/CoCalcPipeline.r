@@ -8,3 +8,8 @@ library(limma)
 # load file that maps phenotype to cel files
 phenoData <- read.AnnotatedDataFrame("phenotype.csv", header = TRUE, sep = ",")
 pData(phenoData)
+
+# store the list of cel files available
+getGEOSuppFiles("GSE35961")
+
+# read the cel files
