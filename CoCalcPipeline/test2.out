@@ -1,0 +1,104 @@
+Sender: LSF System <jszostek@inexorable>
+Subject: Job 14478980: <./submit.sh> in cluster <PMACS-SCC> Done
+
+Job <./submit.sh> was submitted from host <executor> by user <adurtys> in cluster <PMACS-SCC> at Thu Jun 21 13:19:09 2018.
+Job was executed on host(s) <inexorable>, in queue <voight_normal>, as user <adurtys> in cluster <PMACS-SCC> at Thu Jun 21 13:19:10 2018.
+</home/adurtys> was used as the home directory.
+</project/voight_metprofiling/adurtys/bin/CoCalcPipeline> was used as the working directory.
+Started at Thu Jun 21 13:19:10 2018.
+Terminated at Thu Jun 21 13:27:34 2018.
+Results reported at Thu Jun 21 13:27:34 2018.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+./submit.sh
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5.67 sec.
+    Max Memory :                                 225 MB
+    Average Memory :                             149.62 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   504 sec.
+    Turnaround time :                            505 sec.
+
+The output (if any) follows:
+
+Loading required package: methods
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, as.vector, cbind, colnames,
+    do.call, duplicated, eval, evalq, Filter, Find, get, grep, grepl,
+    intersect, is.unsorted, lapply, lengths, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unlist, unsplit
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
+Loading required package: oligoClasses
+No methods found in "RSQLite" for requests: dbGetQuery
+Welcome to oligoClasses version 1.32.0
+Loading required package: Biostrings
+Loading required package: S4Vectors
+Loading required package: stats4
+Loading required package: IRanges
+Loading required package: XVector
+================================================================================
+Welcome to oligo version 1.34.2
+================================================================================
+Warning message:
+In read.dcf(conn) : unable to connect to 'bioconductor.org' on port 80.
+
+Attaching package: ‘limma’
+
+The following object is masked from ‘package:oligo’:
+
+    backgroundCorrect
+
+The following object is masked from ‘package:BiocGenerics’:
+
+    plotMA
+
+Warning message:
+In readLines(filename) : incomplete final line found on 'phenotype.csv'
+                  treatment
+GSM878120.CEL          NASH
+GSM878121.CEL          NASH
+GSM878122.CEL          NASH
+GSM878123.CEL          NASH
+GSM878124.CEL NASHMetformin
+GSM878125.CEL NASHMetformin
+GSM878126.CEL NASHMetformin
+GSM878127.CEL NASHMetformin
