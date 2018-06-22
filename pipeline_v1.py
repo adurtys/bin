@@ -9,7 +9,8 @@ filenames = ["ATAC_67S_reseq1_1.fq.gz", "ATAC_HMTB067S_1.fq.gz", "ATAC_67S_reseq
 	# perform quality control analysis
 	# fastqc ./filename
 	
-	# perform adaptor removal
+	# perform adaptor removal with trimmomatic
+	# bsub -q voight_normal -o trimmomaticTest.out "java -jar /appl/Trimmomatic-0.36/trimmomatic-0.36.jar PE ATAC_67S_reseq1_1.fq.gz ATAC_67S_reseq1_2.fq.gz out_67S_1P.fq.gz out_67S_1U.fq.gz out_67S_2P.fq.gz out_67S_2U.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"
 
 	# align reads to hg19 genome
 
