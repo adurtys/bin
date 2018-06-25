@@ -13,33 +13,35 @@ filenames = ["ATAC_67S_reseq1_1.fq.gz", "ATAC_HMTB067S_1.fq.gz", "ATAC_67S_reseq
 		# fastqc ./filename
 	
 		# perform adapter removal with trimmomatic
-		# bsub -q voight_normal -o trimmomaticTest.out "java -jar /appl/Trimmomatic-0.36/trimmomatic-0.36.jar 
-			# PE forward_file.fq.gz (ex: ATAC_67S_reseq1_1.fq.gz) reverse_file.fq.gz (ex: ATAC_67S_reseq1_2.fq.gz) 
-			# forward_paired_out.fq.gz (ex: out_67S_1P.fq.gz) forward_unpaired_out.fq.gz (out_67S_1U.fq.gz) 
-			# reverse_paired_out.fq.gz (ex: out_67S_2P.fq.gz) reverse_unpaired_out (ex: out_67S_2U.fq.gz) 
-			# ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"
+		# java -jar /appl/Trimmomatic-0.36/trimmomatic-0.36.jar PE forward_file.fq.gz (ex: ATAC_67S_reseq1_1.fq.gz) 
+			# reverse_file.fq.gz (ex: ATAC_67S_reseq1_2.fq.gz) forward_paired_out.fq.gz (ex: out_67S_1P.fq.gz) 
+			# forward_unpaired_out.fq.gz (out_67S_1U.fq.gz) reverse_paired_out.fq.gz (ex: out_67S_2P.fq.gz) reverse_unpaired_out 
+			# (ex: out_67S_2U.fq.gz) ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 
 		# align reads to hg19 genome
 		# chmod +x forward_paired_out.fq.gz
 		# chmod +x reverse_paired_out.fq.gz
 		# STEP 1: generate alignments in suffix array coordinate
-		# bsub -q voight_normal -o bwaTest1.out "bwa aln ../bwa_index/hg19.fa ./forward_paired_out.fq.gz 
-			# (ex: out_67S_1P.fq.gz) > filename1.sai (ex: 67S_1P.sai)"
-		# bsub -q voight_normal -o bwaTest2.out "bwa aln ../bwa_index/hg19.fa ./reverse_paired_out.fq.gz 
-			# (ex: out_67S_2P.fq.gz) > filename2.sai (ex: 67S_2P.sai)"
+		# bwa aln ../bwa_index/hg19.fa ./forward_paired_out.fq.gz > filename1.sai
+		# bwa aln ../bwa_index/hg19.fa ./reverse_paired_out.fq.gz > filename2.sai
+		# OR (for longer reads): 
+		# bwa bwasw ../bwa_index/hg19.fa ./foward_paired_out.fq.gz > filename1.sam
+		# bwa bwasw ../bwa_index/hg19.fa ./reverse_paired_out.fq.gz > filename2.sam
+
 
 		# STEP 2: generate alignments in the SAM format
 		# chmod +x filename1.sai
 		# chmod +x filename2.sai
-		# bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index/hg19.fa ./filename1.sai 
-			# (ex: 67S_1P.sai) ./filename2.sai (ex: 67S_2P.sai) forward_paired_out.fq.gz (ex: out_67S_1P.fq.gz) 
-			# reverse_paired_out.fq.gz (ex: out_67S_2P.fq.gz) > aln.sam"
+		# bwa sampe ../bwa_index/hg19.fa ./filename1.sai ./filename2.sai forward_paired_out.fq.gz reverse_paired_out.fq.gz > aln.sam
+		# OR (for longer reads): 
+		# chmod +x filename1.sam
+		# chmod +x filename2.sam
+		# bwa sampe ../bwa_index/hg19.fa ./filename1.sam ./filename2.sam forward_paired_out.fq.gz reverse_paired_out.fq.gz > aln.sam
 
 		# STEP 3: get multiple hits
-		# bsub -q voight_normal -o bwa_hits_test1.out "bwa samse -n 100 ../bwa_index/hg19.fa ./filename1.sai (ex: 67S_1P.sai) 
-			# ./forward_paired_out.fq.gz (ex: out_67S_1P.fq.gz)"
-		# bsub -q voight_normal -o bwa_hits_test2.out "bwa samse -n 100 ../bwa_index/hg19.fa ./filename2.sai (ex: 67S_2P.sai) 
-			# ./reverse_paired_out.fq.gz (ex: out_67S_2P.fq.gz)"
+		# chmod +x aln.sam
+		# bwa samse -n 100 ../bwa_index/hg19.fa ./filename1.sai ./forward_paired_out.fq.gz
+		# bwa samse -n 100 ../bwa_index/hg19.fa ./filename2.sai ./reverse_paired_out.fq.gz
 
 
 	# perform quality control of alignment reads

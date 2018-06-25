@@ -18,9 +18,25 @@ out_67S_1P.fq.gz out_67S_1U.fq.gz out_67S_2P.fq.gz out_67S_2U.fq.gz ILLUMINACLIP
 chmod +x out_67S_1P.fq.gz out_67S_2P.fq.gz
 bsub -q voight_normal -o bwaTest1.out "bwa aln ../bwa_index/hg19.fa ./out_67S_1P.fq.gz > 67S_1P.sai"
 bsub -q voight_normal -o bwaTest2.out "bwa aln ../bwa_index/hg19.fa ./out_67S_2P.fq.gz > 67S_2P.sai"
+# OR (longer reads):
+# bsub -q voight_normal -o bwaTest3.out "bwa bwasw ../bwa_index/hg19.fa ./out_67S_1P.fq.gz > 67S_1P.sam"
+# bsub -q voight_normal -o bwaTest4.out "bwa bwasw ../bwa_index/hg19.fa ./out_67S_2P.fq.gz > 67S_2P.sam"
 
 chmod +x 67S_1P.sai 67S_2P.sai
+# OR (longer reads): 
+# chmod +x 67S_1P.sam 67S_2P.sam
 bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index/hg19.fa ./67S_1P.sai ./67S_2P.sai ./out_67S_1P.fq.gz ./out_67S_2P.fq.gz > aln.sam"
-# OR:
-# bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index?hg19.fa ./67S_?.sai ./out_67S_?.fq.gz > aln.sam"
+# OR (longer reads):
+# bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index/hg19.fa ./67S_1P.sam ./67S_2P.sam ./out_67S_1P.fq.gz ./out_67S_2P.fq.gz > aln.sam"
 
+# OR (different syntax but hopefully same command as above):
+# use one command depending on length of reads
+# bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index/hg19.fa ./67S_?.sai ./out_67S_?.fq.gz > aln.sam"	# for short reads
+# bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa index/hg19.fa ./67S_?.sam ./out_67S_?.fq.gz > aln.sam"	# for long reads
+
+chmod +x aln.sam
+bsub -q voight_normal -o bwa_hits_test1.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_1P.sai ./out_67S_1P.fq.gz"
+bsub -q voight_normal -o bwa_hits_test2.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_2P.sai ./out_67S_2P.fq.gz"
+# OR (longer reads): 
+# bsub -q voight_normal -o bwa_hits_test1.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_1P.sam ./out_67S_1P.fq.gz"
+# bsub -q voight_normal -o bwa_hits_test2.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_2P.sam ./out_67S_2P.fq.gz"
