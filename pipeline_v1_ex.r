@@ -15,7 +15,8 @@ bsub -q voight_normal -o trimmomaticTest.out "java -jar /appl/Trimmomatic-0.36/t
 out_67S_1P.fq.gz out_67S_1U.fq.gz out_67S_2P.fq.gz out_67S_2U.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"
 
 # align reads to hg19 genome
-chmod +x out_67S_1P.fq.gz out_67S_2P.fq.gz
+chmod +x out_67S_1P.fq.gz 
+chmod +x out_67S_2P.fq.gz
 bsub -q voight_normal -o bwaTest1.out "bwa aln ../bwa_index/hg19.fa ./out_67S_1P.fq.gz > 67S_1P.sai"
 bsub -q voight_normal -o bwaTest2.out "bwa aln ../bwa_index/hg19.fa ./out_67S_2P.fq.gz > 67S_2P.sai"
 # OR (longer reads):
