@@ -40,9 +40,6 @@ filenames = ["ATAC_67S_reseq1_1.fq.gz", "ATAC_HMTB067S_1.fq.gz", "ATAC_67S_reseq
 
 		# STEP 3: get multiple hits
 		# chmod +x aln.sam
-		# bwa samse -n 100 ../bwa_index/hg19.fa ./filename1.sai ./forward_paired_out.fq.gz
-		# bwa samse -n 100 ../bwa_index/hg19.fa ./filename2.sai ./reverse_paired_out.fq.gz
-
 
 	# perform quality control of alignment reads
 	# remove mitochondrial reads

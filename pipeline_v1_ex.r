@@ -7,8 +7,8 @@
 chmod +x ATAC_67S_reseq1_1.fq.gz ATAC_67S_reseq1_2.fq.gz
 
 # perform fastQC analysis
-bsub -q voight_normal -o 67S_fastQC_1.out "fastQC ./ATAC_67S_reseq1_1.fq.gz"
-bsub -q voight_normal -o 67S_fastQC_2.out "fastQC ./ATAC_67S_reseq1_2.fq.gz"
+bsub -q voight_normal -o 67S_fastQC_1.out "fastqc ./ATAC_67S_reseq1_1.fq.gz"
+bsub -q voight_normal -o 67S_fastQC_2.out "fastqc ./ATAC_67S_reseq1_2.fq.gz"
 
 # perform adapter removal
 bsub -q voight_normal -o trimmomaticTest.out "java -jar /appl/Trimmomatic-0.36/trimmomatic-0.36.jar PE ATAC_67S_reseq1_1.fq.gz ATAC_67S_reseq1_2.fq.gz 
@@ -35,8 +35,3 @@ bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa_index/hg19.fa 
 # bsub -q voight_normal -o bwa_sam_align_test.out "bwa sampe ../bwa index/hg19.fa ./67S_?.sam ./out_67S_?.fq.gz > aln.sam"	# for long reads
 
 chmod +x aln.sam
-bsub -q voight_normal -o bwa_hits_test1.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_1P.sai ./out_67S_1P.fq.gz"
-bsub -q voight_normal -o bwa_hits_test2.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_2P.sai ./out_67S_2P.fq.gz"
-# OR (longer reads): 
-# bsub -q voight_normal -o bwa_hits_test1.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_1P.sam ./out_67S_1P.fq.gz"
-# bsub -q voight_normal -o bwa_hits_test2.out "bwa samse -n 100 ../bwa_index/hg19.fa ./67S_2P.sam ./out_67S_2P.fq.gz"
