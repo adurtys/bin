@@ -23,3 +23,7 @@ bwa aln ./bwa_index/hg19.fa ./out_67V_2P.fq.gz > 67V_2P.sai
 
 chmod +x 67V_1P.sai
 chmod +x 67V_2P.sai
+
+bwa sampe ./bwa_index/hg19.fa ./67V_1P.sai ./67V_2P.sai ./out_67V_1P.fq.gz ./out_67V_2P.fq.gz > aln.sam
+
+chmod +x aln.sam
